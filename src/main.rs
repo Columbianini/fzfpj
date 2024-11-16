@@ -44,6 +44,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut current_input = String::new();
     let mut selected_index = 0;
     let mut matched_projects: Vec<(i64, &Project)> = Vec::new();
+    let mut page = 0usize;
+    let items_per_page = 2usize;
 
     loop {
         // Clear screen
@@ -68,8 +70,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .collect();
         matched_projects.sort_by_key(|(score, _)| -score);
 
+        // Calculate Pagination
+        let total_pages = (matched_projects.len() + items_per_page - 1) / items_per_page;
+        page = page.min(total_pages.saturating_sub(1));
+        let start_index: usize = page * items_per_page;
+        let end_index: usize = start_index + items_per_page;
+
         // Display matches
-        for (i, (_score, project)) in matched_projects.iter().enumerate() {
+        for (i, (_score, project)) in matched_projects.iter().enumerate().take(end_index).skip(start_index) {
             if i == selected_index {
                 execute!(
                     stdout,
@@ -98,12 +106,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         terminal::disable_raw_mode()?;
 
                         // Open explorer
-                        Command::new("explorer")
-                            .arg(&expanded_path)
-                            .spawn()?;
+                        // Command::new("explorer")
+                        //     .arg(&expanded_path)
+                        //     .spawn()?;
+                        println!("{}", expanded_path);
 
                         return Ok(());
                     }
+                }
+                KeyCode::PageUp => {
+                    if page > 0 {
+                        page -= 1;
+                    }
+                    selected_index = page * items_per_page;
+                }
+                KeyCode::PageDown => {
+                    if page < total_pages -1 {
+                        page += 1;
+                    }
+                    selected_index = page * items_per_page;
                 }
                 KeyCode::Esc => {
                     break;
@@ -114,7 +135,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     }
                 }
                 KeyCode::Down => {
-                    if selected_index < matched_projects.len().saturating_sub(1) {
+                    if selected_index + 1 < matched_projects.len().min(end_index) {
                         selected_index += 1;
                     }
                 }
