@@ -1,0 +1,70 @@
+[
+    {
+        "name": "Pascal MI",
+        "rootPath": "c:\\PascalProjects\\pascal-menu-insight",
+        "tags": [],
+        "enabled": true
+    },
+    {
+        "name": "Bookmarks",
+        "rootPath": "$home\\Documents\\GitHub\\vscode-bookmarks",
+        "tags": [
+            "Personal",
+            "VS Code"
+        ],
+        "enabled": true
+    },
+    {
+        "name": "Numbered Bookmarks",
+        "rootPath": "~\\Documents\\GitHub\\vscode-numbered-bookmarks",
+        "tags": [
+            "Personal",
+            "VS Code"
+        ],
+        "enabled": false
+    },
+    {
+        "name": "Project A",
+        "rootPath": "c:\\Projects\\ProjectA",
+        "tags": [
+            "Work",
+            "Development"
+        ],
+        "enabled": true
+    },
+    {
+        "name": "Project B",
+        "rootPath": "$home\\Documents\\ProjectB",
+        "tags": [
+            "Personal",
+            "Research"
+        ],
+        "enabled": true
+    },
+    {
+        "name": "Old Projects",
+        "rootPath": "~\\Documents\\OldProjects",
+        "tags": [
+            "Archive"
+        ],
+        "enabled": false
+    },
+    {
+        "name": "Web Development",
+        "rootPath": "c:\\WebProjects\\MyWebsite",
+        "tags": [
+            "Work",
+            "Web"
+        ],
+        "enabled": true
+    },
+    {
+        "name": "Data Analysis",
+        "rootPath": "$home\\Documents\\DataAnalysis",
+        "tags": [
+            "Work",
+            "Data Science"
+        ],
+        "enabled": true
+    }
+]
